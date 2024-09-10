@@ -81,5 +81,5 @@ function init() {
     done = (value = {}) => {
         $done(value)
     }
-    return {isSurge, isQuanX, msg, log, getdata, setdata, get, post, done}
+    return {isQuanX, msg, log, getdata, setdata, get, post, done}
 }
