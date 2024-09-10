@@ -16,12 +16,14 @@ Surge、QuantumultX、Loon、Shadowrocket:
 2.打开达乐美披萨公众号->优惠｜咨询->有奖游戏->手动完成一次游戏，若提示获取Cookie成功则可以使用该脚本
 3.关闭获取ck脚本，避免产生不必要的mitm。
 
-[Script]
-cron "30 10 * * *" script-path=https://raw.githubusercontent.com/kkingwing/QX-/main/dml.js,timeout=300, tag=达美乐披萨
+[task_local]
+30 10 * * * https://raw.githubusercontent.com/kkingwing/QX-/main/dml.js, tag=达美乐, enabled=true
 
-http-request ^https:\/\/game\.dominos\.com\.cn\/.+\/game\/gameDone script-path=https://raw.githubusercontent.com/kkingwing/QX-/main/dml.js,requires-body=true, timeout=10, tag=达美乐披萨获取token
-[MITM]
-hostname =game.dominos.com.cn
+[rewrite_local]
+^https:\/\/game\.dominos\.com\.cn\/.+\/game\/gameDone url script-request-body https://raw.githubusercontent.com/kkingwing/QX-/main/dml.js
+    
+[mitm]
+game.dominos.com.cn
 
 ====================================
 ⚠️【免责声明】
