@@ -73,9 +73,7 @@ if ($request && $request.method != 'OPTIONS' && resUrl.match(urlPattern)) {
     if (signbodyVal) qxApi.setdata(signbodyVal, signbodyKey)
     //调试，输出变量需要用 '${xxx}'  来表达
     qxApi.msg(cookieName, `获取Cookie: 成功`, `请求URL: ${signurlVal}`)
-    qxApi.msg(cookieName, '测试内容：', (`\n\n===========\n`,
-        `\n获取的url:\n${signurlVal}`, `\n请求头:\n${signheaderVal}`, `\n请求体:\n${signbodyVal} n===========\n\n`)
-    )
+    qxApi.msg(cookieName, '测试内容：', `获取的url:\n${signurlVal}\n请求头:\n${signheaderVal}\n请求体:\n${signbodyVal}`)
 }
 
 
