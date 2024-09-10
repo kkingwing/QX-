@@ -1,3 +1,4 @@
+//  v0.3 简化阅读逻辑
 //  v0.2 简化模板
 //  v0.1 理解模板
 
@@ -43,7 +44,21 @@ const tokenheaderKey = 'qinyi_tokenheader_meituan'
 const signurlKey = 'qinyi_signurl_meituan'
 const signheaderKey = 'qinyi_signheader_meituan'
 const signbodyKey = 'qinyi_signbody_meituan'
-const qxApi = init()
+const qxApi = {
+    getdata: (key) => $prefs.valueForKey(key),
+    setdata: (key, val) => $prefs.setValueForKey(key, val),
+    msg: (title, subtitle, body) => $notify(title, subtitle, body),
+    log: (message) => console.log(message),
+    get: (url, cb) => {
+        url.method = 'GET'
+        $task.fetch(url).then((res) => cb(null, {}, res.body))
+    },
+    post: (url, cb) => {
+        url.method = 'POST'
+        $task.fetch(url).then((res) => cb(null, {}, res.body))
+    },
+    done: (value = {}) => $done(value)
+}
 
 //2. 取出cookie逻辑(拦截这个url正则的url、header、body)
 const resUrl = $request.url
@@ -58,29 +73,11 @@ if ($request && $request.method != 'OPTIONS' && resUrl.match(urlPattern)) {
     if (signbodyVal) qxApi.setdata(signbodyVal, signbodyKey)
     //调试
     qxApi.msg(cookieName, `获取Cookie: 成功`, `请求URL: ${signurlVal}`)
-    qxApi.log(message=(`\n\n===========\n`, cookieName, `\n获取的url:\n`, signurlVal, `\n请求头:\n`, signheaderVal, `\n请求体:\n`, signbodyVal, `\n===========\n\n`))
-
-    // qxApi.msg(cookieName, `获取Cookie: 成功`, ``)
+    qxApi.log(message = (`\n\n===========\n`, cookieName,
+        `\n获取的url:\n`, signurlVal, `\n请求头:\n`, signheaderVal, `\n请求体:\n`, signbodyVal,
+        `\n===========\n\n`)
+    )
 }
 
-function init() {
-    // 方法名变量 = (参数) =>指向 $内置qxApiapi方法
-    // 简写的箭头函数声明形式: get = (key,) => { ... }
-    const getdata = (key) => $prefs.valueForKey(key) //$prefs qxApi存储和获取数据的持久化存储模块。
-    const setdata = (key, val) => $prefs.setValueForKey(key, val)
-    const msg = (title, subtitle, body) => $notify(title, subtitle, body) //$notify: 是用来发送通知的模块，用于调试和向用户显示信息。
-    const log = (message) => console.log(message) //console.log 日志输出
-    const get = (url, cb) => {
-        url.method = 'GET'
-        $task.fetch(url).then((res) => cb(null, {}, res.body)) //$task.fetch: 用于发起 HTTP 请求
-    }
-    const post = (url, cb) => {
-        url.method = 'POST'
-        $task.fetch(url).then((res) => cb(null, {}, res.body))
-    }
-    const done = (value = {}) => $done(value)
-
-    return {getdata, setdata, msg, log, get, post, done}
-}
 
 qxApi.done()
