@@ -3,9 +3,19 @@
 
 /*
 拦截美团请求的cookie，持久化保存
+
+# 用法
+# 美团签到领红包
+# 使用方法1：美团APP -> 我的 -> 福利中心 -> 领红包 -> 手动签到一次
+# 使用方法2：美团APP -> 首页 -> 红包签到 -> 手动签到一次
+[rewrite_local]
+^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/ url script-request-body https://raw.githubusercontent.com/kkingwing/QX-/main/02_test_meituan_v02.js
+
+hostname = i.meituan.com
+
 */
 
-/**
+/*
 封装qxApi方法，简介：
     $prefs: 是 QuantumultX 用来存储和获取数据的持久化存储模块。
     $notify: 是用来发送通知的模块，用于调试和向用户显示信息。
@@ -19,13 +29,6 @@
     log(message)：简单的控制台输出日志，使用 console.log。
     get(url, cb) 和 post(url, cb)：封装了 GET 和 POST 请求，直接使用 $task.fetch 发起请求，然后回调处理响应体。
     done(value)：标记脚本执行完毕，调用 $done()。
-**/
-
-/*
-用法：
-美团签到
-^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/ url script-request-body https://raw.githubusercontent.com/chavyleung/scripts/master/meituan/meituan.cookie.js
-
 */
 
 
