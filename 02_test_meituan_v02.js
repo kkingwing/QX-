@@ -33,7 +33,7 @@ hostname = i.meituan.com
 
 
 //1. 变量定义
-const cookieName = '美团'
+const cookieName = '美团-测试'
 const tokenurlKey = 'qinyi_tokenurl_meituan' //以人名开头，区分他人变量
 const tokenheaderKey = 'qinyi_tokenheader_meituan'
 const signurlKey = 'qinyi_signurl_meituan'
