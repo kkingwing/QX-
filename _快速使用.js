@@ -31,19 +31,33 @@ JSON.stringify：用于将 JavaScript 对象 转换为 JSON 格式的字符串�
 功能：拦截美团请求的cookie，持久化保存
 
 用法：
-# 使用方法1：美团APP -> 我的 -> 福利中心 -> 领红包 -> 手动签到一次
-# 使用方法2：美团APP -> 首页 -> 红包签到 -> 手动签到一次
+
 
 解析：
 // 这个域名即请求api的域名，
 // 请求URL为: https://i.meituan.com/evolve/signin/signpost/100219?yodaReady=h5&csecpla……
 
-写入：
-[rewrite_local]
-^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/ url script-request-body  https://raw.githubusercontent.com/kkingwing/QX-/main/02_test_meituan_v02.js
-hostname = i.meituan.com 
+重写模板：
+=================================
+使用方法：
+QuantumultX:
+1.将获取Cookie脚本保存到本地
+2. 使用方法1：美团APP -> 我的 -> 福利中心 -> 领红包 -> 手动签到一次; 使用方法2：美团APP -> 首页 -> 红包签到 -> 手动签到一次
+3.关闭获取ck脚本，避免产生不必要的mitm。
 
-10 0 0 * * *  https://raw.githubusercontent.com/kkingwing/QX-/main/03_understand_script_meituan_v05%EF%BC%88%E4%BB%BF%E5%AE%98%E6%A1%A3%EF%BC%89.js,tag=美团签到，enabled=true
+[task_local]
+10 0 0 * * * https://raw.githubusercontent.com/kkingwing/QX-/main/v05_meituan_sign.js,tag=美团签到,enabled=true
+
+[rewrite_local]
+^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/ url script-request-body https://raw.githubusercontent.com/kkingwing/QX-/main/v05_meituan_token.js
+
+[mitm]
+i.meituan.com 
+=================================
+[rewrite_local]
+
+
+
 */
 const qxApi = init()
 

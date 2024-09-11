@@ -4,6 +4,23 @@
 // v0.2 改写
 // v0.1 原文理解
 
+/*
+使用方法：
+QuantumultX:
+1.将获取Cookie脚本保存到本地
+2. 使用方法1：美团APP -> 我的 -> 福利中心 -> 领红包 -> 手动签到一次; 使用方法2：美团APP -> 首页 -> 红包签到 -> 手动签到一次
+3.关闭获取ck脚本，避免产生不必要的mitm。
+
+[task_local]
+10 0 0 * * * https://raw.githubusercontent.com/kkingwing/QX-/main/v05_meituan_token.js,tag=美团签到,enabled=true
+
+[rewrite_local]
+^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/ url script-request-body https://raw.githubusercontent.com/kkingwing/QX-/main/v05_meituan_token.js
+
+[mitm]
+i.meituan.com 
+*/
+
 
 const cookie_name = 'meituan_test'
 const token_url_key = 'qinyi_token_url_meituan'
