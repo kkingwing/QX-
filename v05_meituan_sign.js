@@ -6,12 +6,12 @@
 // v0.5 仿官档
 // git的执行逻辑脚本，用法见token获取文档
 
-const cookie_name = '美团执行-测试'
-const token_url_store = 'qinyi_tokenurl_meituan'
-const token_header_store = 'qinyi_tokenheader_meituan'
-const sign_url_store = 'qinyi_signurl_meituan'
-const sign_header_store = 'qinyi_signheader_meituan'
-const sign_body_store = 'qinyi_signbody_meituan'
+const cookie_name = 'meituan_test'
+const token_url_key = 'qinyi_token_url_meituan'
+const token_header_key = 'qinyi_token_header_meituan'
+const sign_url_key = 'qinyi_sign_url_meituan'
+const sign_header_key = 'qinyi_sign_header_meituan'
+const sign_body_key = 'qinyi_sign_body_meituan'
 const QX = init()
 
 // 获取已存储的Token和签到数据
