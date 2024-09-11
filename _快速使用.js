@@ -55,52 +55,43 @@ QuantumultX:
 [mitm]
 i.meituan.com 
 =================================
-
-
-
 */
-const qxApi = init()
 
+// 初始化函数
 function init() {
-    isSurge = () => {
-      return undefined === this.$httpClient ? false : true
-    }
-    isQuanX = () => {
-      return undefined === this.$task ? false : true
-    }
-    getdata = (key) => {
-      if (isSurge()) return $persistentStore.read(key)
-      if (isQuanX()) return $prefs.valueForKey(key)
-    }
-    setdata = (key, val) => {
-      if (isSurge()) return $persistentStore.write(key, val)
-      if (isQuanX()) return $prefs.setValueForKey(key, val)
-    }
-    msg = (title, subtitle, body) => {
-      if (isSurge()) $notification.post(title, subtitle, body)
-      if (isQuanX()) $notify(title, subtitle, body)
-    }
-    log = (message) => console.log(message)
-    get = (url, cb) => {
-      if (isSurge()) {
-        $httpClient.get(url, cb)
-      }
-      if (isQuanX()) {
-        url.method = 'GET'
-        $task.fetch(url).then((resp) => cb(null, resp, resp.body))
-      }
-    }
-    post = (url, cb) => {
-      if (isSurge()) {
-        $httpClient.post(url, cb)
-      }
-      if (isQuanX()) {
-        url.method = 'POST'
-        $task.fetch(url).then((resp) => cb(null, resp, resp.body))
-      }
-    }
-    done = (value = {}) => {
-      $done(value)
-    }
-    return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
+  getdata = (key) => $prefs.valueForKey(key)
+  setdata = (key, val) => $prefs.setValueForKey(key, val)
+  msg = (title, subtitle, body) => $notify(title, subtitle, body)
+  log = (message) => console.log(message)
+  get = (myRequest, call_func) => {
+    myRequest.method = 'GET'
+    $task.fetch(myRequest).then(resp => call_func(null, resp, resp.body))
   }
+  post = (myRequest, call_func) => {
+    myRequest.method = 'POST'
+
+    // $task.fetch() qx的http请求，异步函数，返回一个 Promise 对象，此处命名为myRequest，包含 url、headers、body。
+    // Promise 的 .then() 方法接受两个参数：第一个是成功时的回调函数，第二个是失败时的回调函数，异步函数，哪个发生执行哪个。
+    $task.fetch(myRequest).then(
+      /*
+      请求成功处理（promise的第 1 个参数，命名为response，定义其为一个回调函数并调用）：
+        - null：表示没有错误，因为这是成功的回调。
+        - response：整个 HTTP 响应对象。
+        - response.body：响应体内容，即服务器返回的实际数据。
+
+      call_func 是一个回调函数，用于处理请求的结果。它的参数通常是 (error, response, body)  
+      */
+
+      response => call_func(null, response, response.body),
+      /* 
+      请求失败处理（Promise 的第 2 个参数，回调函数 reason）：
+        - reason.error：表示请求失败的错误描述。
+        - null, null：由于请求失败，response 和 response.body 都为 null。
+       */
+      reason => call_func(reason.error, null, null)
+    )
+  }
+  done = (value = {}) => $done(value)
+
+  return { getdata, setdata, msg, log, get, post, done }
+}
