@@ -38,7 +38,7 @@ function sign() {
 
   const myRequest = {
     url: sign_url,
-    headers: JSON.parse(headers),
+    headers: JSON.parse(sign_header),
     body: sign_body // 保持请求体为原始值
   }
 
