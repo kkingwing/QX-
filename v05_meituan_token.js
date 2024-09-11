@@ -1,3 +1,10 @@
+// v0.5 仿官档
+// v0.4 去注释
+// v0.3 多注释理解
+// v0.2 改写
+// v0.1 原文理解
+
+
 const cookie_name = 'meituan_test'
 const token_url_key = 'qinyi_token_url_meituan'
 const token_header_key = 'qinyi_token_header_meituan'

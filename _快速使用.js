@@ -43,8 +43,7 @@ JSON.stringify：用于将 JavaScript 对象 转换为 JSON 格式的字符串�
 ^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/ url script-request-body  https://raw.githubusercontent.com/kkingwing/QX-/main/02_test_meituan_v02.js
 hostname = i.meituan.com 
 
-
-10 0 0 * * *  
+10 0 0 * * *  https://raw.githubusercontent.com/kkingwing/QX-/main/03_understand_script_meituan_v05%EF%BC%88%E4%BB%BF%E5%AE%98%E6%A1%A3%EF%BC%89.js,tag=美团签到，enabled=true
 */
 const qxApi = init()
 

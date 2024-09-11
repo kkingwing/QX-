@@ -1,3 +1,9 @@
+// v0.5 仿官档
+// v0.4 去注释
+// v0.3 多注释理解
+// v0.2 改写
+// v0.1 原文理解
+
 const cookie_name = '美团执行-测试'
 const token_url_key = 'qinyi_tokenurl_meituan'
 const token_header_key = 'qinyi_tokenheader_meituan'
