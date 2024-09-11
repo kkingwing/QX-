@@ -36,18 +36,9 @@ function sign() {
   QX.log(`请求头: ${sign_header_value}`)
   QX.log(`请求体: ${sign_body_value}`)
 
-  // 处理请求头，确保为对象格式
-  let headers;
-  try {
-    headers = JSON.parse(sign_header_value); // 如果 headers 是 JSON 字符串，解析为对象
-  } catch (e) {
-    QX.msg(cookie_name, "签到失败", "无法解析请求头，请检查存储的数据")
-    return QX.done();
-  }
-  
   const myRequest = {
     url: sign_url_value,
-    headers: headers,
+    headers: JSON.parse(headers),
     body: sign_body_value // 保持请求体为原始值
   }
 
@@ -58,7 +49,7 @@ function sign() {
       return QX.done();
     }
 
-    QX.log(`${cookie_name}, 响应数据: ${data}`) // 调试日志
+    QX.log(`${cookie_name}, 编码: ${result.code}, 说明: ${result.msg}`) // 调试日志
 
     if (!data) {
       QX.msg(cookie_name, "签到结果: 失败", "响应数据为空")
