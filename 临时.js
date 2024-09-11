@@ -21,7 +21,7 @@ const sign_url_value = QX.getdata(sign_url_key)
 const sign_header_value = QX.getdata(sign_header_key)
 const sign_body_value = QX.getdata(sign_body_key)
 
-// 检查Token和签到数据是否存在
+// 检查Token是否存在
 if (!sign_url_value || !sign_header_value || !sign_body_value) {
     QX.msg(cookie_name, "Token 或 签到数据缺失", "请先获取 Token 或签到数据");
     return QX.done();
@@ -29,14 +29,14 @@ if (!sign_url_value || !sign_header_value || !sign_body_value) {
 
 sign()
 
-// 签到请求函数
+// 签到请求
 function sign() {
-  // 日志记录，调试用
+  // 记录日志
   QX.log(`准备执行签到，签到URL: ${sign_url_value}`)
   QX.log(`请求头: ${sign_header_value}`)
   QX.log(`请求体: ${sign_body_value}`)
   
-  // 处理请求头，确保为对象格式
+  // 处理请求头和请求体
   let headers;
   try {
     headers = JSON.parse(sign_header_value); // 如果 headers 是 JSON 字符串，解析为对象
@@ -49,29 +49,26 @@ function sign() {
     url: sign_url_value,
     headers: headers,
     body: typeof sign_body_value === 'string' ? sign_body_value : JSON.stringify(sign_body_value) // 确保请求体为JSON字符串
-  }
+  } 
 
-  // 发起POST请求
   QX.post(myRequest, (error, response, data) => {
     if (error) {
       QX.msg(cookie_name, "签到结果: 失败", `错误信息: ${error}`)
-      return QX.done();
+      return QX.done()
     }
-
-    QX.log(`${cookie_name}, 响应数据: ${data}`) // 调试日志
-
-    if (data) {
+    
+    QX.log(`${cookie_name}, data: ${data}`) //调试日志
+    if (data) {  // 若有请求体，执行下面代码
       let result;
       try {
-        result = JSON.parse(data); // 尝试解析响应数据
+        result = JSON.parse(data);
       } catch (e) {
         QX.msg(cookie_name, "签到结果: 失败", "无法解析服务器响应数据")
         return QX.done();
       }
 
-      // 处理响应结果
-      let subTitle = ''
-      let detail = ''
+      let subTitle = ``
+      let detail = ``
 
       if (result.code == 0) {
         subTitle = '签到结果: 成功'
@@ -97,7 +94,7 @@ function sign() {
     } else {
       QX.msg(cookie_name, "签到结果: 失败", "响应数据为空或解析错误")
     }
-    QX.done();
+    QX.done()
   })
 }
 
@@ -116,7 +113,7 @@ function init() {
     $task.fetch(myRequest).then(
       resp => call_func(null, resp, resp.body),
       reason => call_func(reason.error, null, null) // 错误处理
-    )
+    );
   }
   done = (value = {}) => $done(value)
 
