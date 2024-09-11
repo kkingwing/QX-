@@ -39,6 +39,8 @@ function sign() {
   }
 
   // 发起POST请求
+  //  error 是在请求失败时返回的参数。如果 error 存在，它意味着请求本身出了问题
+  // response 包含了服务器的完整响应，包括状态码、响应头等信息。res_body的调用本脚本已足够。
   QX.post(myRequest, (error, response, res_body) => {
 
     QX.log(`${cookie_name}, 响应数据: ${res_body}`) // 调试日志
