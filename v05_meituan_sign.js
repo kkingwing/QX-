@@ -16,11 +16,11 @@ const sign_body_key = 'qinyi_sign_body_meituan'
 const QX = init()
 
 // 获取已存储的Token和签到数据
-const token_url = QX.getdata(token_url_store)
-const token_header = QX.getdata(token_header_store)
-const sign_url = QX.getdata(sign_url_store)
-const sign_header = QX.getdata(sign_header_store)
-const sign_body = QX.getdata(sign_body_store)
+const token_url = QX.getdata(token_url_key)
+const token_header = QX.getdata(token_header_key)
+const sign_url = QX.getdata(sign_url_key)
+const sign_header = QX.getdata(sign_header_key)
+const sign_body = QX.getdata(sign_body_key)
 
 // 检查Token和签到数据是否存在
 if (!sign_url || !sign_header || !sign_body) {
