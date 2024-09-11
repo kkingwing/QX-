@@ -3,7 +3,7 @@
 // v0.3 多注释理解
 // v0.2 改写
 // v0.1 原文理解
-
+// v0.5 仿官档
 const cookie_name = '美团执行-测试'
 const token_url_key = 'qinyi_tokenurl_meituan'
 const token_header_key = 'qinyi_tokenheader_meituan'
@@ -29,10 +29,24 @@ sign()
 
 // 签到请求
 function sign() {
+  // 记录日志
+  QX.log(`准备执行签到，签到URL: ${sign_url_value}`)
+  QX.log(`请求头: ${sign_header_value}`)
+  QX.log(`请求体: ${sign_body_value}`)
+  
+  // 处理请求头和请求体
+  let headers;
+  try {
+    headers = JSON.parse(sign_header_value); // 如果 headers 是 JSON 字符串，解析为对象
+  } catch (e) {
+    QX.msg(cookie_name, "签到失败", "无法解析请求头，请检查存储的数据")
+    return QX.done();
+  }
+  
   const myRequest = {
     url: sign_url_value,
-    headers: JSON.parse(sign_header_value), // 如果存储的headers是JSON字符串，解析成对象
-    body: JSON.stringify(sign_body_value) // 将请求体转换成JSON字符串发送
+    headers: headers,
+    body: typeof sign_body_value === 'string' ? sign_body_value : JSON.stringify(sign_body_value) // 确保请求体为JSON字符串
   }
 
   QX.post(myRequest, (error, response, data) => {
@@ -43,7 +57,14 @@ function sign() {
     
     QX.log(`${cookie_name}, data: ${data}`) //调试日志
     if (data) {  // 若有请求体，执行下面代码
-      const result = JSON.parse(data)
+      let result;
+      try {
+        result = JSON.parse(data);
+      } catch (e) {
+        QX.msg(cookie_name, "签到结果: 失败", "无法解析服务器响应数据")
+        return QX.done();
+      }
+
       let subTitle = ``
       let detail = ``
 
