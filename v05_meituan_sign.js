@@ -6,6 +6,7 @@
 // v0.5 仿官档
 // git的执行逻辑脚本，用法见token获取文档
 
+//与token一致的变量（复制过来即可）
 const cookie_name = 'meituan_test'
 const token_url_key = 'qinyi_token_url_meituan'
 const token_header_key = 'qinyi_token_header_meituan'
