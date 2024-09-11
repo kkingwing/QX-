@@ -46,7 +46,7 @@ QuantumultX:
 3.关闭获取ck脚本，避免产生不必要的mitm。
 
 [task_local]
-10 0 0 * * * https://raw.githubusercontent.com/kkingwing/QX-/main/v05_meituan_sign.js,tag=美团签到,enabled=true
+10 0 0 * * * https://raw.githubusercontent.com/kkingwing/QX-/main/v05_meituan_sign.js,tag=美团签到-测试,enabled=true
 
 [rewrite_local]
 # 美团签到-测试
