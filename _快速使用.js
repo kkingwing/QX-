@@ -55,7 +55,6 @@ QuantumultX:
 [mitm]
 i.meituan.com 
 =================================
-[rewrite_local]
 
 
 

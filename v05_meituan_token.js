@@ -5,6 +5,7 @@
 // v0.1 原文理解
 
 /*
+=================================
 使用方法：
 QuantumultX:
 1.将获取Cookie脚本保存到本地
@@ -12,13 +13,15 @@ QuantumultX:
 3.关闭获取ck脚本，避免产生不必要的mitm。
 
 [task_local]
-10 0 0 * * * https://raw.githubusercontent.com/kkingwing/QX-/main/v05_meituan_token.js,tag=美团签到,enabled=true
+10 0 0 * * * https://raw.githubusercontent.com/kkingwing/QX-/main/v05_meituan_sign.js,tag=美团签到,enabled=true
 
 [rewrite_local]
+# 美团签到-测试
 ^https:\/\/i.meituan.com\/evolve\/signin\/signpost\/ url script-request-body https://raw.githubusercontent.com/kkingwing/QX-/main/v05_meituan_token.js
 
 [mitm]
 i.meituan.com 
+=================================
 */
 
 
