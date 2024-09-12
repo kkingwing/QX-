@@ -3,6 +3,10 @@
  * @description: 方式1：美团APP -> 美团买菜 -> 我的 -> 买菜币 -> 去使用 -> 在退回上一级，QX提示成功即可
  * @description: 方式2：美团APP -> 美团买菜 -> 我的 -> 买菜币 -> 左滑一半做推出手势再松手（不要真的左滑退出） -> QX提示成功即可
  *
+ * 
+ * # 美团买菜任务测试
+^https?:\/\/mall\.meituan\.com\/api\/c\/mallcoin\/checkIn\/queryTaskListInfoV.\? url script-request-header https://raw.githubusercontent.com/kkingwing/QX-/main/meituan_maicaicoin_token%20copy.js
+hostname = mall.meituan.com
  */
 // meituan_maicaicoin_token.js - Refactored to align with v07_meituan_token.js style
 
