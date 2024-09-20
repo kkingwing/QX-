@@ -27,9 +27,9 @@ sign()
 
 
 function sign() {
-  QX.log(`\n准备执行签到，签到URL: \n${sign_url} \n\n`)
-  QX.log(`\n请求头: \n${sign_header}\n\n`)
-  QX.log(`\n请求体: \n${sign_body}\n\n`)
+  // QX.log(`\n准备执行签到，签到URL: \n${sign_url} \n\n`)
+  // QX.log(`\n请求头: \n${sign_header}\n\n`)
+  // QX.log(`\n请求体: \n${sign_body}\n\n`)
 
 
   const myRequest = {
@@ -43,7 +43,7 @@ function sign() {
   // response 包含了服务器的完整响应，包括状态码、响应头等信息。res_body的调用本脚本已足够。
   QX.post(myRequest, (error, response, res_body) => {
 
-    QX.log(`${cookie_name}, 响应数据: ${res_body}`) // 调试日志
+    //QX.log(`${cookie_name}, 响应数据: ${res_body}`) // 调试日志
 
     // 检查
     if (!res_body) { //响应数据是否存在
@@ -60,7 +60,7 @@ function sign() {
     }
 
 
-    QX.log(`${cookie_name}, 编码: ${res_js_body.code}, 说明: ${res_js_body.msg}`);
+    // QX.log(`${cookie_name}, 编码: ${res_js_body.code}, 说明: ${res_js_body.msg}`);
 
     let subTitle = ''
     let detail = ''
